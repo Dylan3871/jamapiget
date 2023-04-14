@@ -1,0 +1,21 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 8081
+spring:
+  application:
+    name: API-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enable: true
+          lower-case-service-id: true
+      routes:
+      - id: student-api
+        uri: lb://student-api
+        predicates:
+          - Path=/api/students/**
